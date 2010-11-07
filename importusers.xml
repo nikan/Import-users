@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<mosinstall type="component">
+  <name>Import Users</name>
+  <creationDate>17/11/2005</creationDate>
+  <author>Nikos Anagnostou</author>
+  <copyright>(c) 2005 Ideatech SA</copyright>
+  <authorEmail>nanagnos@ideatech-online.com</authorEmail>
+  <authorUrl>www.ideatech-online.com</authorUrl>
+  <version>0.3</version>
+  <description>
+This component is a wrapper for the famous import script by Wayne Stewart.
+I decided to write it when I came across Wayne's script thinking that it would be a good case for me to
+learn writting a Mambo component this way.
+It will import users into Mambo by updating the 3 database tables Mambo uses to store
+user information with data from a .csv text file.
+  </description>
+  <files>
+  </files>
+  <images>
+  </images>
+  <install>
+      <queries>
+      <query> CREATE TABLE IF NOT EXISTS `#__iu_csvfiles` ( `id` int(11) NOT NULL 
+      auto_increment, `name` varchar(100) NOT NULL default '', `active`
+      tinyint(1) NOT NULL default '0',  PRIMARY KEY (`id`) ) TYPE=MyISAM 
+      </query>
+    </queries>
+  </install>
+  <installfile>install.importusers.php</installfile>
+  <uninstallfile>uninstall.importusers.php</uninstallfile>
+  <uninstall>
+      <queries>
+      <query>DROP TABLE IF EXISTS `#__iu_csvfiles`</query>
+    </queries> 
+  </uninstall>
+  <administration>
+    <menu>Import Users</menu>
+    <files>
+      <filename>admin.importusers.php</filename>
+      <filename>admin.importusers.html.php</filename>
+      <filename>toolbar.importusers.php</filename>
+      <filename>toolbar.importusers.html.php</filename>
+      <filename>tmpl/mail.html</filename>
+      <filename>help/importusers.html</filename>
+      <filename>importconfig.php</filename>
+      <filename>importusers.xml</filename>
+    </files>
+    <images></images>
+  </administration>
+</mosinstall> 

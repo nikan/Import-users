@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en_US" xml:lang="en_US">
+<head>
+<title>Import Users to Mambo</title>
+<link href="../../../../help/css/help.css" rel="stylesheet" type="text/css" />
+<meta name="copyright" content="(C) 2005 Nikos Anagnostou" />
+<meta name="license" content="http://www.gnu.org/copyleft/gpl.html GNU/GPL" />
+</head>
+<body>
+
+<h1>MAMBO USER IMPORT COMPONENT</h1>
+
+MAMBO USER IMPORT COMPONENT by N. Anagnostou (nanagnos@gmail.com)<br/><br/>
+Version 0.3 November 18, 2005.<br/>
+
+This component is a wrapper for the famous import script by Wayne Stewart.
+I decided to write it when I came across Wayne's script as I thought it was a good case for me to
+learn writting a Mambo component this way.<br/>
+
+It will import users into Mambo by updating the 3 database tables Mambo uses to store
+user information with data from a .csv text file. <br/><br/>
+
+Wayne's script provided functionality that:
+
+  <ul>
+    <li>imports the users as regular users, <br/>
+    </li>
+    <li>sets their password, each user having a unique password based on their username<br/>
+    </li><li>skips importing a user if their username already exists in the database<br/>
+    </li><li>sets their date of registration to the time of the users import into the database<br/>
+    </li><li>sends each user an email confirming their username and password<br/>
+    </li><li>prints information and any error messages to the browser window so you can see what's going on<br/>
+    </li>
+    <li>and has a test mode allowing you to run the script without writing to your database</li>
+  </ul>
+and was  assuming that there is no header record in the .csv file.<br/><br/>
+
+This component replicates all this, with the following modifications:<br/>
+a. Test or actual import is selected from the toolbar.<br/>
+b. You can customize the email format, using the EditMAIL button from the toolbar.<br/>
+c. Host, Database, User and Password settings are  not necesary as the code is rewritten to use 
+the settings of the mambo the component is running on.<br/><br/>
+d. The email "From", "Subject" and the csv delimiter need to be set manually once the installation is complete,
+in the file <installdir>/administrator/components/com_importusers/importconfig.php. <br/>
+The default delimiter is "," and there are default values for "From" and "Subject".<br/><br/>
+
+This component, as the original script,  assumes that there are three fields per record in the .csv file.
+Each record in the .csv file must be in the format:<br/>
+"mambo_username", "User's Full Name", "users_email_address"<br/><br/>
+
+For example: <br/>
+"juser","Joe User","juser@emailaddress.com"<br/>
+"sperson", "Sandra Person","sperson@hermail.org"<br/>
+.<br/>
+.<br/>
+. (etc)<br/>
+<br/>
+If there are more than 3 fields in a record the extra fields will be ignored. <br/><br/>
+
+In v0.2 two bugs were fixed, namely the counter problem in testing mode and the escaping problem when saving the edited mail.<br/>
+
+In v0.3 editing of the configuration file through the mambo admin interface was added. Also, a kind of persistency between test and 
+real import was implemented, i.e. a file that was uploaded for testing can be imported without reuploading, once the import button is hit.
+Also a new database table keeps track of the files uploaded for import. 
+Finally, some checking for the file type was introduced (i.e. is really a csv then and only then the import can be performed) and, since the program relies on the $_FILES autoglobal, a PHP version checking was also introduced.
+<h3>DISCLAIMER:</h3>
+This component is offered as-is. Use it at your own risk. I make no claims regarding its suitability 
+for your particular situation. The havoc you create with it is totally your own responsibility.<br/>
+</body>
+</html>
+
